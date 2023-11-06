@@ -25,7 +25,7 @@ export default defineNuxtConfig({
                 },
             ],
         },
-        baseURL: "./",
+        baseURL: "/",
     },
     $production: {
         sourcemap: true
