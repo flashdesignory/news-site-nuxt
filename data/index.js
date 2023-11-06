@@ -1,5 +1,3 @@
-import { provide } from "vue";
-import { useHead } from "#imports";
 import { content as contentEn } from "~/data/en/content";
 import { content as contentJp } from "~/data/jp/content";
 import { content as contentAr } from "~/data/ar/content";

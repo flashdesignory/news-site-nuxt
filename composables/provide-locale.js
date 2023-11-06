@@ -30,6 +30,6 @@ export function provideLocale() {
             lang: "en",
             dir: "ltr",
             ...dataSource["en"]
-        })
+        });
     }
 }
