@@ -1,45 +1,35 @@
-<script lang="js">
-import { inject } from "vue";
-import { useRoute } from "#imports";
-export default {
-    setup() {
-        const { content } = inject("data");
-        const route = useRoute();
-        return { route, content };
-    },
-    data() {
-        return {
-            showPortal: false,
-        };
-    },
-    mounted() {
-        this.showPortal = this.content[this.$route.name].notification;
-    },
-    methods: {
-        openPortal() {
-            this.showPortal = true;
-        },
-        closePortal() {
-            this.showPortal = false;
-        }
-    },
-};
+<script setup>
+import { inject, onMounted, ref } from "vue";
+
+const { id } = defineProps({
+    id: String
+});
+const { content } = inject("data");
+const showPortal = ref(false);
+
+onMounted(() => {
+    showPortal.value = content[id].notification ? true : false;
+});
+
+function closePortal() {
+    showPortal.value = false;
+}
 </script>
 
 <template>
   <Section
-    v-for="section in content[route.name].sections"
+    v-for="section in content[id].sections"
     :key="section.id"
     :section="section"
   />
   <Teleport to="body">
     <Toast
-      v-if="content[route.name].notification"
+      v-if="content[id].notification"
       v-show="showPortal"
       :on-close="closePortal"
       :on-accept="closePortal"
       :on-reject="closePortal"
-      :notification="content[route.name].notification"
+      :notification="content[id].notification"
     />
   </Teleport>
 </template>
