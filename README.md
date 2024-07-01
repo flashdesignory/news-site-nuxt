@@ -1,8 +1,8 @@
 # The Daily Broadcast
 
-## Preview
+## Link
 
-https://sensational-valkyrie-ec585e.netlify.app/
+[https://flashdesignory-news-site-nuxt.netlify.app/](https://flashdesignory-news-site-nuxt.netlify.app/)
 
 ## Description
 This app is a news-site built with [Nuxt](https://nuxt.com/). It utilizes the [News Site Template](https://github.com/flashdesignory/news-site-template) as the basis for styling and functionality.
