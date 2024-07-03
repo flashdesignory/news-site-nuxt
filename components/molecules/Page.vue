@@ -1,14 +1,32 @@
 <script setup>
 import { inject, onMounted, ref } from "vue";
+import { useLocalStorage } from "#imports";
 
-const { id } = defineProps({
+const props = defineProps({
     id: String
 });
 const { content } = inject("data");
 const showPortal = ref(false);
 
+/** assign app settings from local storage */
+const [reduceMotion] = useLocalStorage("news-site-settings-reduced-motion", false);
+const [highContrast] = useLocalStorage("news-site-settings-high-contrast", false);
+
 onMounted(() => {
-    showPortal.value = content[id].notification ? true : false;
+    showPortal.value = content[props.id].notification ? true : false;
+
+    console.log("reduceMotion", reduceMotion);
+    console.log("highContrast", highContrast);
+
+    if (reduceMotion)
+        document.documentElement.classList.add("reduced-motion");
+    else
+        document.documentElement.classList.remove("reduced-motion");
+
+    if (highContrast)
+        document.documentElement.classList.add("forced-colors");
+    else
+        document.documentElement.classList.remove("forced-colors");
 });
 
 function closePortal() {
@@ -29,7 +47,7 @@ function closePortal() {
       :on-close="closePortal"
       :on-accept="closePortal"
       :on-reject="closePortal"
-      :notification="content[id].notification"
+      :notification="content[props.id].notification"
     />
   </Teleport>
 </template>

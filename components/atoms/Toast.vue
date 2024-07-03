@@ -1,27 +1,48 @@
 <script setup>
+import { useLocalStorage } from "#imports";
 import toastStyles from "news-site-css/dist/toast.module.css";
 import buttonStyles from "news-site-css/dist/button.module.css";
 
-const { onClose, onAccept, onReject, notification } = defineProps({
+const props = defineProps({
     onClose: Function,
     onAccept: Function,
     onReject: Function,
     notification: Object
 });
 
+const [notificationSeen, setNotificationSeen] = useLocalStorage(`news-site-notification-${props.notification.name}-seen`, false);
+
+function handleOnClose() {
+    setNotificationSeen(true);
+    props.onClose();
+}
+
+function handleOnAccept() {
+    setNotificationSeen(true);
+    props.onAccept();
+}
+
+function handleOnReject() {
+    setNotificationSeen(false);
+    props.onReject();
+}
+
 const callbacks = {
-    "accept": onAccept,
-    "reject": onReject
+    "accept": handleOnAccept,
+    "reject": handleOnReject
 };
 </script>
 
 <template>
-  <div :class="[toastStyles.toast, toastStyles.open]">
+  <div
+    v-if="!notificationSeen"
+    :class="[toastStyles.toast, toastStyles.open]"
+  >
     <button
       id="close-toast-link"
       :class="toastStyles['toast-close-button']"
       title="Close Button"
-      @click="onClose"
+      @click="handleOnClose"
     >
       <div
         :class="[toastStyles['toast-close-button-icon'], 'animated-icon', 'close-icon', 'hover']"
