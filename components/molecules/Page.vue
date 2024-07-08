@@ -15,9 +15,6 @@ const [highContrast] = useLocalStorage("news-site-settings-high-contrast", false
 onMounted(() => {
     showPortal.value = content[props.id].notification ? true : false;
 
-    console.log("reduceMotion", reduceMotion);
-    console.log("highContrast", highContrast);
-
     if (reduceMotion)
         document.documentElement.classList.add("reduced-motion");
     else
