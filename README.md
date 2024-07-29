@@ -1,5 +1,7 @@
 # The Daily Broadcast
 
+This repository is no longer maintained. Please visite [benchmark-workloads](https://github.com/GoogleChromeLabs/benchmark-workloads) for the most up-to-date version.
+
 ## Link
 
 [https://flashdesignory-news-site-nuxt.netlify.app/](https://flashdesignory-news-site-nuxt.netlify.app/)
